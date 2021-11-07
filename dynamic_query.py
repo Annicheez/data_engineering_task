@@ -11,7 +11,7 @@ db = 'test_db'
 con = pymysql.connections.Connection(host=host, user=user, passwd=password, db=db, port=port)
 
 # Exmaple Dynamic SQL query generator
-# To be called inside the lambda fucntion. Pass params through event object in handler params
+# To be called inside the lambda fucntion. Pass params through event object
 def display_columns(cols, target_table):
 
     return (f'''SELECT {','.join([col for col in cols])}
@@ -29,7 +29,7 @@ def lambda_handler(event, context):
     # Params can be passed through the event object during trigger
     cursor.execute(display_columns('col_list', 'db.table'))
 
-    # Print return to console
+    # Return rows
     return '\n'.join([row for row in cursor.fetchall()])
 
 
